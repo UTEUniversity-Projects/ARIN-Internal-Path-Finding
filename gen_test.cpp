@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-    int n = 10;
+    int n = 500;
 
     int compileStatus = system("g++ MAKETEST.cpp -o MAKETEST.exe");
     if (compileStatus != 0) {
