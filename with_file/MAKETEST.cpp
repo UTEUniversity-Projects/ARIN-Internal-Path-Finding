@@ -114,10 +114,6 @@ void read_data(){
 
 // ---------------------- GENERATE INPUT TEST START HERE -----------------------
 
-struct path_type{
-    double len;
-    deque<int> nodes;
-};
 struct testcase_type{
     coordinate coor;
     int row_id;
@@ -150,41 +146,7 @@ testcase_type generate_input(){
     return test;
 }
 
-// --------------------------- FIND PATH START HERE ----------------------------
-
-double dis_hor, dis_ver, dis_lat, dis_lon;
-
-double haversine_dis(coordinate &a, coordinate &b){
-    double d_lat = (b.lat - a.lat) * PI / 180.0;
-    double d_lon = (b.lon - a.lon) * PI / 180.0;
-
-    double x = (a.lat) * PI / 180.0;
-    double y = (b.lat) * PI / 180.0;
-
-    double one = pow(sin(d_lat / 2), 2) + pow(sin(d_lon / 2), 2) * cos(x) * cos(y);
-    double rad = 6371.0;
-    double two = 2.0 * asin(sqrt(one));
-    return rad * two * 1000.0;
-}
-
-void preprocess_dis(){
-    dis_hor = haversine_dis(grid[1], grid[2]);
-    dis_ver = haversine_dis(grid[1], grid[4]);
-    dis_lat = dis_ver / 16.0;
-    dis_lon = dis_hor / 16.0;
-}
-
 // ---------------------- GENERATE OUTPUT TEST START HERE ----------------------
-
-string get_current_timestamp() {
-    time_t now = time(0);
-    tm *gmtm = gmtime(&now);
-    char buf[100];
-    strftime(buf, sizeof(buf), "%Y-%m-%dT%H:%M:%S", gmtm);
-    string timestamp(buf);
-    timestamp += ".000000000";
-    return timestamp + "Z";
-}
 
 void write_input(testcase_type &test) {
     input_gen << fixed << setprecision(12);
@@ -242,7 +204,6 @@ int main(){
 
     read_data();
     pre_generation();
-    preprocess_dis();
     generate_multi_test();
 
     return 0;

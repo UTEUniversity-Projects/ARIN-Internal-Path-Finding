@@ -249,8 +249,9 @@ path_type find_path(testcase_type &test){
 
 void write_output(output_type &result) {
     if (output.state == "success"){
-        for (size_t i = 0; i < result.path.nodes.size(); ++i) {
-            output_gen << result.path.nodes[i] << " ";
+        output_gen << fixed << setprecision(9) << result.path.len << endl;
+        for (auto it = result.path.nodes.rbegin(); it != result.path.nodes.rend(); ++it) {
+            output_gen << *it << " ";
         }
         output_gen << endl;
     } else if (output.state == "fail") {

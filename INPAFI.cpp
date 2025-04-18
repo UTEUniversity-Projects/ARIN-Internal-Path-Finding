@@ -241,14 +241,16 @@ path_type find_path(testcase_type &test){
 
 void write_output(output_type &result) {
     if (output.state == "success"){
-        for (size_t i = 0; i < result.path.nodes.size(); ++i) {
-            cout << result.path.nodes[i] << " ";
+        cout << fixed << setprecision(9) << result.path.len << endl;
+        for (auto it = result.path.nodes.rbegin(); it != result.path.nodes.rend(); ++it) {
+            cout << *it << " ";
         }
         cout << endl;
     } else if (output.state == "fail") {
         cout << -1 << endl;
     }
 }
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(0); cout.tie(0);
